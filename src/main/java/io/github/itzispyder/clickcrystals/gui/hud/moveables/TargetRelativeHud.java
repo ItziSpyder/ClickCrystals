@@ -1,5 +1,6 @@
 package io.github.itzispyder.clickcrystals.gui.hud.moveables;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.itzispyder.clickcrystals.gui.hud.Hud;
 import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.modules.modules.clickcrystals.InGameHuds;
@@ -8,10 +9,10 @@ import io.github.itzispyder.clickcrystals.modules.modules.rendering.HealthAsBar;
 import io.github.itzispyder.clickcrystals.util.MathUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.PlayerUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.PlayerSkinDrawer;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -31,7 +32,7 @@ public class TargetRelativeHud extends Hud {
     }
 
     @Override
-    public void render(DrawContext context) {
+    public void render(MatrixStack context) {
         renderBackdrop(context);
 
         if (target != null && !target.isDead() && timer > System.currentTimeMillis()) {
@@ -51,7 +52,8 @@ public class TargetRelativeHud extends Hud {
 
             // player head
             caret += g + 2;
-            PlayerSkinDrawer.draw(context, targetEntry.getSkinTexture(), margin, caret, 15);
+            RenderSystem.setShaderTexture(0, targetEntry.getSkinTexture());
+            PlayerSkinDrawer.draw(context, margin, caret, 15);
 
             // player name (next to player head)
             // and player ping and distance
@@ -100,11 +102,10 @@ public class TargetRelativeHud extends Hud {
             float scale = 1.8F;
             int tx = (int) ((margin + 80 + g) / scale - 1);
             int ty = (int) (y / scale + 5);
-            context.getMatrices().push();
-            context.getMatrices().scale(scale, scale, scale);
-            context.drawItem(totem, tx, ty);
-            context.drawItemInSlot(mc.textRenderer, totem, tx, ty, pops);
-            context.getMatrices().pop();
+            context.push();
+            context.scale(scale, scale, scale);
+            RenderUtils.drawItem(context, totem, tx, ty, 1.0F, pops);
+            context.pop();
 
             // end
             caret += g + 8;

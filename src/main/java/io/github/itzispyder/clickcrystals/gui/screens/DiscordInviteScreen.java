@@ -7,7 +7,7 @@ import io.github.itzispyder.clickcrystals.gui.misc.Tex;
 import io.github.itzispyder.clickcrystals.gui.misc.brushes.RoundRectBrush;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -72,7 +72,7 @@ public class DiscordInviteScreen extends GuiScreen {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         renderOpaqueBackground(context);
         RenderUtils.drawTexture(context, Tex.Backdrops.BACKDROP_1, baseX, baseY, baseWidth, baseHeight);
 

@@ -7,7 +7,7 @@ import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.modules.modules.rendering.EntityIndicator;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import io.github.itzispyder.clickcrystals.util.misc.Voidable;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.RotationAxis;
 
 public class EntityIndicatorHud extends Hud {
@@ -18,7 +18,7 @@ public class EntityIndicatorHud extends Hud {
     }
 
     @Override
-    public void render(DrawContext context) {
+    public void render(MatrixStack context) {
         EntityIndicator m = Module.get(EntityIndicator.class);
         if (!m.isEnabled()) {
             return;
@@ -27,17 +27,17 @@ public class EntityIndicatorHud extends Hud {
             m.update();
         }
 
-        int cX = context.getScaledWindowWidth() / 2;
-        int cY = context.getScaledWindowHeight() / 2;
+        int cX = RenderUtils.winWidth() / 2;
+        int cY = RenderUtils.winHeight() / 2;
         int radius = m.hudSize.getVal();
         int size = m.spriteSize.getVal();
         var nearest = Voidable.of(EntityIndicator.nearest);
 
         nearest.accept(display -> {
-            context.getMatrices().push();
-            context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(display.rotToYaw()), cX, cY, 0);
+            context.push();
+            context.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(display.rotToYaw()), cX, cY, 0);
             RenderUtils.drawTexture(context, Tex.Overlays.DIRECTION, cX - radius, cY - radius, radius * 2, radius * 2);
-            context.getMatrices().pop();
+            context.pop();
         });
 
         Voidable.of(EntityIndicator.entities).accept(displays -> {

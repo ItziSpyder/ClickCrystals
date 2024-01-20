@@ -3,7 +3,8 @@ package io.github.itzispyder.clickcrystals.gui.elements.common.interactive;
 import io.github.itzispyder.clickcrystals.gui.GuiElement;
 import io.github.itzispyder.clickcrystals.gui.GuiScreen;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class ScrollPanelElement extends GuiElement {
 
@@ -87,19 +88,19 @@ public class ScrollPanelElement extends GuiElement {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
 
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY) {
-        context.enableScissor(x, y, x + width, y + height);
+    public void render(MatrixStack context, int mouseX, int mouseY) {
+        DrawableHelper.enableScissor(x, y, x + width, y + height);
         super.render(context, mouseX, mouseY);
-        context.disableScissor();
+        DrawableHelper.disableScissor();
     }
 
     @Override
-    public void postRender(DrawContext context, int mouseX, int mouseY) {
+    public void postRender(MatrixStack context, int mouseX, int mouseY) {
         if (!canScroll() || !canRender()) return;
         if (scrolling) {
             int deltaY = mouseY - prevDrag;

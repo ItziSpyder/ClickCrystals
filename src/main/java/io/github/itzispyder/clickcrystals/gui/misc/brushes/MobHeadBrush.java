@@ -1,8 +1,9 @@
 package io.github.itzispyder.clickcrystals.gui.misc.brushes;
 
 import io.github.itzispyder.clickcrystals.Global;
+import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import io.github.itzispyder.clickcrystals.util.misc.ManualMap;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -92,14 +93,14 @@ public class MobHeadBrush implements Global {
         return REGISTRY.get(entity);
     }
 
-    public static void drawHead(DrawContext context, Class<? extends Entity> entity, int x, int y, int size) {
+    public static void drawHead(MatrixStack context, Class<? extends Entity> entity, int x, int y, int size) {
         Identifier tex = getIdentifier(entity);
         if (tex != null) {
-            context.drawTexture(tex, x, y, 0, 0, size, size, size, size);
+            RenderUtils.drawTexture(context, tex, x, y, size, size);
         }
     }
 
-    public static void drawHead(DrawContext context, Entity entity, int x, int y, int size) {
+    public static void drawHead(MatrixStack context, Entity entity, int x, int y, int size) {
         drawHead(context, entity.getClass(), x, y, size);
     }
 }

@@ -6,9 +6,9 @@ import io.github.itzispyder.clickcrystals.gui.misc.Tex;
 import io.github.itzispyder.clickcrystals.gui.misc.brushes.RoundRectBrush;
 import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.Window;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
@@ -41,7 +41,7 @@ public class Notification implements Global {
         this.icon = icon;
     }
 
-    public void render(DrawContext context) {
+    public void render(MatrixStack context) {
         if (!showing.get()) {
             return;
         }

@@ -15,7 +15,7 @@ import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.util.FileValidationUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -36,7 +36,7 @@ public class BrowsingScreen extends DefaultBase {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         // default base
         this.renderDefaultBase(context);
 
@@ -81,7 +81,7 @@ public class BrowsingScreen extends DefaultBase {
         }
 
         @Override
-        public void onRender(DrawContext context, int mouseX, int mouseY) {
+        public void onRender(MatrixStack context, int mouseX, int mouseY) {
             String text = "§7To manually reload scripts, execute chat command §f%sreload".formatted(ClickCrystals.commandPrefix.getKeyName());
             RenderUtils.drawText(context, text, x + 10, y + height / 3, 0.7F, false);
         }
@@ -147,7 +147,7 @@ public class BrowsingScreen extends DefaultBase {
         }
 
         @Override
-        public void onRender(DrawContext context, int mouseX, int mouseY) {
+        public void onRender(MatrixStack context, int mouseX, int mouseY) {
             if (isHovered(mouseX, mouseY)) {
                 RenderUtils.fill(context, x, y, width, height, 0x60FFFFFF);
             }

@@ -6,7 +6,7 @@ import io.github.itzispyder.clickcrystals.gui.misc.brushes.RoundRectBrush;
 import io.github.itzispyder.clickcrystals.gui.screens.modulescreen.BrowsingScreen;
 import io.github.itzispyder.clickcrystals.modules.Category;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class CategoryElement extends GuiElement {
 
@@ -19,7 +19,7 @@ public class CategoryElement extends GuiElement {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
         if (BrowsingScreen.currentCategory == category && mc.currentScreen instanceof BrowsingScreen) {
             RoundRectBrush.drawRoundHoriLine(context, x, y, width, height, Gray.GENERIC_LOW);
         }

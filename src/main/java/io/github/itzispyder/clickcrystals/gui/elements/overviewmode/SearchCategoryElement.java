@@ -9,7 +9,7 @@ import io.github.itzispyder.clickcrystals.gui.misc.organizers.GridOrganizer;
 import io.github.itzispyder.clickcrystals.gui.screens.modulescreen.OverviewScreen;
 import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.Comparator;
 import java.util.List;
@@ -28,7 +28,7 @@ public class SearchCategoryElement extends GuiElement {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
         RoundRectBrush.drawRoundRect(context, x, y, width, height, 5, Gray.BLACK);
         RenderUtils.drawTexture(context, Tex.ICON, x + 5, y + 7, 10, 10);
         RenderUtils.drawText(context, "Overview GUI", x + 18, y + 9, 0.9F, false);

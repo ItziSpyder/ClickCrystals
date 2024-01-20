@@ -27,7 +27,7 @@ import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import io.github.itzispyder.clickcrystals.util.misc.Voidable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.io.*;
 import java.util.Arrays;
@@ -170,11 +170,11 @@ public class ClickScriptIDE extends DefaultBase {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         renderOpaqueBackground(context);
 
-        context.getMatrices().push();
-        context.getMatrices().translate(baseX, baseY, 0);
+        context.push();
+        context.translate(baseX, baseY, 0);
 
         // backdrop
         RoundRectBrush.drawRoundRect(context, 0, 0, baseWidth, baseHeight, 10, Gray.BLACK);
@@ -229,7 +229,7 @@ public class ClickScriptIDE extends DefaultBase {
         deleteButton.x = baseX + 10;
         deleteButton.y = baseY + caret;
 
-        context.getMatrices().pop();
+        context.pop();
 
 
         // content

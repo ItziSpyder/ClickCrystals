@@ -9,7 +9,7 @@ import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.modules.modules.clickcrystals.InGameHuds;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class HudEditScreen extends GuiScreen {
                 .pos(mc.getWindow().getScaledWidth() - 30, 11)
                 .dimensions(20, 20)
                 .onRender((context, mouseX, mouseY, button) -> {
-                    context.drawTexture(Tex.Icons.SETTINGS, button.x, button.y, 0, 0, button.width, button.height, button.width, button.height);
+                    RenderUtils.drawTexture(context, Tex.Icons.SETTINGS, button.x, button.y, button.width, button.height);
                 })
                 .onPress(button -> {
                     mc.setScreenAndRender(new ModuleEditScreen(Module.get(InGameHuds.class)));
@@ -48,21 +48,21 @@ public class HudEditScreen extends GuiScreen {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         RenderUtils.fill(context, 0, 0, this.width, this.height, 0x90000000);
 
-        RenderUtils.drawHorizontalLine(context, 0, context.getScaledWindowHeight() / 2, context.getScaledWindowWidth(), 1, 0xFF8C8C8C);
-        RenderUtils.drawHorizontalLine(context, 0, context.getScaledWindowHeight() - 10, context.getScaledWindowWidth(), 1, 0xFF8C8C8C);
-        RenderUtils.drawHorizontalLine(context, 0, 10, context.getScaledWindowWidth(), 1, 0xFF8C8C8C);
-        RenderUtils.drawVerticalLine(context, context.getScaledWindowWidth() / 2, 0, context.getScaledWindowHeight(), 1, 0xFF8C8C8C);
-        RenderUtils.drawVerticalLine(context, context.getScaledWindowWidth() - 10, 0, context.getScaledWindowHeight(), 1, 0xFF8C8C8C);
-        RenderUtils.drawVerticalLine(context, 10, 0, context.getScaledWindowHeight(), 1, 0xFF8C8C8C);
+        RenderUtils.drawHorizontalLine(context, 0, RenderUtils.winHeight() / 2, RenderUtils.winWidth(), 1, 0xFF8C8C8C);
+        RenderUtils.drawHorizontalLine(context, 0, RenderUtils.winHeight() - 10, RenderUtils.winWidth(), 1, 0xFF8C8C8C);
+        RenderUtils.drawHorizontalLine(context, 0, 10, RenderUtils.winWidth(), 1, 0xFF8C8C8C);
+        RenderUtils.drawVerticalLine(context, RenderUtils.winWidth() / 2, 0, RenderUtils.winHeight(), 1, 0xFF8C8C8C);
+        RenderUtils.drawVerticalLine(context, RenderUtils.winWidth() - 10, 0, RenderUtils.winHeight(), 1, 0xFF8C8C8C);
+        RenderUtils.drawVerticalLine(context, 10, 0, RenderUtils.winHeight(), 1, 0xFF8C8C8C);
 
         if (selected != null) {
-            RenderUtils.drawHorizontalLine(context, 0, selected.y, context.getScaledWindowWidth(), 1, 0xFFFFFFFF);
-            RenderUtils.drawVerticalLine(context, selected.x, 0, context.getScaledWindowHeight(), 1, 0xFFFFFFFF);
-            RenderUtils.drawHorizontalLine(context, 0, selected.y + selected.height - 1, context.getScaledWindowWidth(), 1, 0xFFFFFFFF);
-            RenderUtils.drawVerticalLine(context, selected.x + selected.width - 1, 0, context.getScaledWindowHeight(), 1, 0xFFFFFFFF);
+            RenderUtils.drawHorizontalLine(context, 0, selected.y, RenderUtils.winWidth(), 1, 0xFFFFFFFF);
+            RenderUtils.drawVerticalLine(context, selected.x, 0, RenderUtils.winHeight(), 1, 0xFFFFFFFF);
+            RenderUtils.drawHorizontalLine(context, 0, selected.y + selected.height - 1, RenderUtils.winWidth(), 1, 0xFFFFFFFF);
+            RenderUtils.drawVerticalLine(context, selected.x + selected.width - 1, 0, RenderUtils.winHeight(), 1, 0xFFFFFFFF);
         }
     }
 

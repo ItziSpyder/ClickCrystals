@@ -3,7 +3,7 @@ package io.github.itzispyder.clickcrystals.gui.hud.fixed;
 import io.github.itzispyder.clickcrystals.client.system.Notification;
 import io.github.itzispyder.clickcrystals.gui.hud.Hud;
 import io.github.itzispyder.clickcrystals.util.misc.Voidable;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class NotificationHud extends Hud {
 
@@ -16,7 +16,7 @@ public class NotificationHud extends Hud {
     }
 
     @Override
-    public void render(DrawContext context) {
+    public void render(MatrixStack context) {
         if (readingNotification && notification.isPresent() && !notification.get().isDead()) {
             notification.accept(n -> {
                 n.render(context);

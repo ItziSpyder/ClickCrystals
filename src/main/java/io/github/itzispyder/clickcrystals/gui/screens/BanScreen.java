@@ -1,5 +1,6 @@
 package io.github.itzispyder.clickcrystals.gui.screens;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.itzispyder.clickcrystals.client.client.ClickCrystalsGate;
 import io.github.itzispyder.clickcrystals.client.system.ClickCrystalsInfo;
 import io.github.itzispyder.clickcrystals.gui.GuiScreen;
@@ -8,7 +9,8 @@ import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import io.github.itzispyder.clickcrystals.util.misc.Voidable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
@@ -31,8 +33,9 @@ public class BanScreen extends GuiScreen {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.drawTexture(OPTIONS_BACKGROUND_TEXTURE, 0, 0, 0, 0.0F, 0.0F, this.width, this.height, 32, 32);
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
+        RenderSystem.setShaderTexture(0, OPTIONS_BACKGROUND_TEXTURE);
+        DrawableHelper.drawTexture(context, 0, 0, 0, 0.0F, 0.0F, this.width, this.height, 32, 32);
         //RenderUtils.fillGradient(context, 0, 0, windowWidth, windowHeight, 0xA0000000, 0xA0FF4538);
 
         int cX = baseX + baseWidth / 2;
@@ -52,7 +55,7 @@ public class BanScreen extends GuiScreen {
         text = StringUtils.color("&cReason:\n&7%s".formatted(ses.isPresent() ? ses.get().reason() : "Unspecified reason."));
         var lines = mc.textRenderer.wrapLines(StringVisitable.plain(text), baseWidth);
         for (OrderedText line : lines) {
-            context.drawCenteredTextWithShadow(mc.textRenderer, line, cX, cY, 0xFFFFFFFF);
+            DrawableHelper.drawCenteredTextWithShadow(context, mc.textRenderer, line, cX, cY, 0xFFFFFFFF);
             cY += 10;
         }
 

@@ -12,7 +12,7 @@ import io.github.itzispyder.clickcrystals.gui.screens.DefaultBase;
 import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class InfoScreen extends DefaultBase {
 
@@ -79,7 +79,7 @@ public class InfoScreen extends DefaultBase {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         this.renderDefaultBase(context);
 
         // content

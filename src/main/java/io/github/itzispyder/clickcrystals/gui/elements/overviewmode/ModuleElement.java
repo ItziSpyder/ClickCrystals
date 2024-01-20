@@ -7,7 +7,7 @@ import io.github.itzispyder.clickcrystals.gui.misc.brushes.RoundRectBrush;
 import io.github.itzispyder.clickcrystals.gui.screens.modulescreen.OverviewScreen;
 import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class ModuleElement extends GuiElement {
 
@@ -20,7 +20,7 @@ public class ModuleElement extends GuiElement {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
         Gray color = Gray.DARK_GRAY;
 
         if (module.isEnabled()) {

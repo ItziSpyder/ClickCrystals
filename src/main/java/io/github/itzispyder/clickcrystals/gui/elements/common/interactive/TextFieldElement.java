@@ -8,7 +8,8 @@ import io.github.itzispyder.clickcrystals.util.MathUtils;
 import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import io.github.itzispyder.clickcrystals.util.misc.Pair;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
@@ -47,9 +48,9 @@ public class TextFieldElement extends GuiElement implements Typeable {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
-        context.getMatrices().push();
-        context.enableScissor(x, y, x + width, y + height);
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
+        context.push();
+        DrawableHelper.enableScissor(x, y, x + width, y + height);
 
         RenderUtils.fill(context, x, y, width, height, backgroundColor.getHex());
         List<OrderedText> text = mc.textRenderer.wrapLines(StringVisitable.plain(styledContent), width - 25);
@@ -73,7 +74,7 @@ public class TextFieldElement extends GuiElement implements Typeable {
             if (selectedAll) {
                 RenderUtils.fill(context, x + 20, caret - 1, mc.textRenderer.getWidth(line), 9, 0xA07E75FF);
             }
-            context.drawText(mc.textRenderer, line, x + 20, caret, textColor.getHex(), false);
+            mc.textRenderer.draw(context, line, x + 20, caret, textColor.getHex());
         }
 
         if (selectionBlinking) {
@@ -82,8 +83,8 @@ public class TextFieldElement extends GuiElement implements Typeable {
             RenderUtils.drawVerticalLine(context, tX, tY, 9, 1, 0xE0FFFFFF);
         }
 
-        context.disableScissor();
-        context.getMatrices().pop();
+        DrawableHelper.disableScissor();
+        context.pop();
     }
 
     @Override

@@ -13,7 +13,7 @@ import io.github.itzispyder.clickcrystals.gui.misc.organizers.GridOrganizer;
 import io.github.itzispyder.clickcrystals.util.StringUtils;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
@@ -70,18 +70,18 @@ public class HomeScreen extends GuiScreen {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         renderOpaqueBackground(context);
 
         // title card
-        context.getMatrices().push();
-        context.getMatrices().translate(baseX, baseY, 0);
+        context.push();
+        context.translate(baseX, baseY, 0);
 
         RoundRectBrush.drawRoundRect(context, 0, 0, baseWidth, baseHeight, 10, Gray.BLACK);
         RoundRectBrush.drawTabBottom(context, 15, baseHeight / 2 - 10, baseWidth - 30, baseHeight / 2, 10, Gray.DARK_GRAY);
         RenderUtils.drawTexture(context, Tex.Backdrops.BACKDROP_0, 10, 10, baseWidth - 20, baseHeight / 2 + 40);
 
-        context.getMatrices().pop();
+        context.pop();
 
         // content
         if (!ClickCrystals.info.getMotd().trim().isEmpty()) {
@@ -98,7 +98,7 @@ public class HomeScreen extends GuiScreen {
         searchBar.y = caret - titleTrans;
     }
 
-    public void renderMotd(DrawContext context) {
+    public void renderMotd(MatrixStack context) {
         List<String> lines = StringUtils.wrapLines(ClickCrystals.info.getMotd(), 55, true);
         int i = 3;
         int x = baseX + baseWidth / 2 - 150;

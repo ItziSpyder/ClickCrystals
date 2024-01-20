@@ -11,8 +11,8 @@ import io.github.itzispyder.clickcrystals.gui.screens.HudEditScreen;
 import io.github.itzispyder.clickcrystals.gui.screens.modulescreen.BrowsingScreen;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.function.BooleanSupplier;
 
@@ -41,7 +41,7 @@ public class SettingScreen extends DefaultBase {
     }
 
     @Override
-    public void baseRender(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void baseRender(MatrixStack context, int mouseX, int mouseY, float delta) {
         // default base
         this.renderDefaultBase(context);
 
@@ -82,7 +82,7 @@ public class SettingScreen extends DefaultBase {
         }
 
         @Override
-        public void onRender(DrawContext context, int mouseX, int mouseY) {
+        public void onRender(MatrixStack context, int mouseX, int mouseY) {
             if (isHovered(mouseX, mouseY) && check.getAsBoolean()) {
                 RenderUtils.fill(context, x, y, width, height, 0x60FFFFFF);
             }

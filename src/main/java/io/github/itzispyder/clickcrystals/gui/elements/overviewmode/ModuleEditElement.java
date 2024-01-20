@@ -11,7 +11,7 @@ import io.github.itzispyder.clickcrystals.gui.screens.modulescreen.OverviewScree
 import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.modules.settings.SettingSection;
 import io.github.itzispyder.clickcrystals.util.minecraft.RenderUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class ModuleEditElement extends GuiElement {
 
@@ -38,7 +38,7 @@ public class ModuleEditElement extends GuiElement {
     }
 
     @Override
-    public void onRender(DrawContext context, int mouseX, int mouseY) {
+    public void onRender(MatrixStack context, int mouseX, int mouseY) {
         RoundRectBrush.drawRoundRect(context, x, y, width, height, 5, Gray.DARK_GRAY);
 
         int caret = y + 10;

@@ -5,9 +5,9 @@ import io.github.itzispyder.clickcrystals.events.events.client.ScreenInitEvent;
 import io.github.itzispyder.clickcrystals.modules.Module;
 import io.github.itzispyder.clickcrystals.modules.modules.rendering.NoGuiBackground;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,7 +24,7 @@ public abstract class MixinScreen implements Global {
     }
 
     @Inject(at = @At("HEAD"), method = "renderBackground", cancellable = true)
-    public void onRenderBackground(DrawContext context, CallbackInfo ci) {
+    public void onRenderBackground(MatrixStack context, CallbackInfo ci) {
         if (Module.isEnabled(NoGuiBackground.class) && mc.currentScreen instanceof HandledScreen) {
             ci.cancel();
         }
