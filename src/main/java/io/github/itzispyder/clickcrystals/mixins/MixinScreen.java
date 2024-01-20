@@ -24,7 +24,7 @@ public abstract class MixinScreen implements Global {
     }
 
     @Inject(at = @At("HEAD"), method = "renderBackground", cancellable = true)
-    public void onRenderBackground(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void onRenderBackground(DrawContext context, CallbackInfo ci) {
         if (Module.isEnabled(NoGuiBackground.class) && mc.currentScreen instanceof HandledScreen) {
             ci.cancel();
         }
