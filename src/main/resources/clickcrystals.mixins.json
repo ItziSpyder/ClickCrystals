@@ -25,7 +25,8 @@
     "MixinMouse",
     "MixinParticleManager",
     "MixinScreen",
-    "MixinSplashOverlay"
+    "MixinSplashOverlay",
+    "MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
