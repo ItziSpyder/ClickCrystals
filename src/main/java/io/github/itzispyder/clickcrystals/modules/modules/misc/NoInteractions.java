@@ -40,6 +40,12 @@ public class NoInteractions extends DummyModule {
             .def(false)
             .build()
     );
+    public final ModuleSetting<Boolean> allowSign = scGeneral.add(createBoolSetting()
+            .name("allow-sign-editing")
+            .description("Allow sign interactions or editing.")
+            .def(false)
+            .build()
+    );
 
     public NoInteractions() {
         super("no-interactions", Categories.MISC, "Prevents opening certain containers(e-chests,chests,etc).");
@@ -63,7 +69,9 @@ public class NoInteractions extends DummyModule {
         else if (b == Blocks.CRAFTING_TABLE || b == Blocks.ANVIL || b == Blocks.NOTE_BLOCK || b == Blocks.JUKEBOX || b == Blocks.SMOKER || key.contains("furnace")) {
             return allowDecor.getVal();
         }
-
+        else if (key.contains("sign")) {
+            return allowSign.getVal();
+        }
         return true;
     }
 }

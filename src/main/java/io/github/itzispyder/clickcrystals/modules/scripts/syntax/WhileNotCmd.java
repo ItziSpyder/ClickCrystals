@@ -2,8 +2,10 @@ package io.github.itzispyder.clickcrystals.modules.scripts.syntax;
 
 import io.github.itzispyder.clickcrystals.client.clickscript.ScriptArgs;
 import io.github.itzispyder.clickcrystals.client.clickscript.ScriptCommand;
+import io.github.itzispyder.clickcrystals.util.StringUtils;
+import io.github.itzispyder.clickcrystals.util.misc.Scheduler;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class WhileNotCmd extends ScriptCommand {
 
@@ -13,22 +15,31 @@ public class WhileNotCmd extends ScriptCommand {
 
     @Override
     public void onCommand(ScriptCommand command, String line, ScriptArgs args) {
-        double period = args.get(0).toDouble();
-        long millis = (long)(period * 1000);
-        int beginIndex = 1;
-        IfCmd.ConditionType type = args.get(beginIndex).toEnum(IfCmd.ConditionType.class, null);
+        long period;
+        int beginIndex;
 
-        CompletableFuture.runAsync(() -> {
-            var condition = IfCmd.parseCondition(type, args, beginIndex);
-            while (!condition.left) {
-                try {
+        if (StringUtils.isNumber(args.get(0).toString())) {
+            period = (long)(args.get(0).toDouble() * 1000);
+            beginIndex = 1;
+        }
+        else {
+            period = 50;
+            beginIndex = 0;
+        }
+
+        AtomicReference<Scheduler.Task> task = new AtomicReference<>();
+        task.set(system.scheduler.runRepeatingTask(() -> {
+            try {
+                var condition = IfCmd.parseCondition(args, beginIndex);
+                if (!condition.left) {
                     executeOnClient(args, condition.right);
-                    Thread.sleep(millis);
-                    condition = IfCmd.parseCondition(type, args, beginIndex);
                 }
-                catch (Exception ignore) {}
+                else if (task.get() != null) {
+                    task.get().cancel();
+                }
             }
-        });
+            catch (Exception ignore) {}
+        }, 0, period, Scheduler.INFINITE_ITERATIONS));
     }
 
     private void executeOnClient(ScriptArgs args, int beginIndex) {

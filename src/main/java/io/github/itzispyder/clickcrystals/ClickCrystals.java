@@ -2,6 +2,7 @@ package io.github.itzispyder.clickcrystals;
 
 import com.google.gson.Gson;
 import io.github.itzispyder.clickcrystals.client.clickscript.ClickScript;
+import io.github.itzispyder.clickcrystals.client.client.ProfileManager;
 import io.github.itzispyder.clickcrystals.client.system.ClickCrystalsInfo;
 import io.github.itzispyder.clickcrystals.client.system.Version;
 import io.github.itzispyder.clickcrystals.commands.commands.*;
@@ -50,7 +51,6 @@ import org.lwjgl.glfw.GLFW;
  * TODO: (2) Update mod "gradle.properties"
  * TODO: (4) Update "README.md"
  * Publishing checklist
- * TODO: (5) Modrinth Release
  * TODO: (6) GitHub Release
  * TODO: (7) PlanetMC Release
  * TODO: (7) CurseForge Release
@@ -58,6 +58,11 @@ import org.lwjgl.glfw.GLFW;
  * TODO: (9) Discord Announcement
  */
 public final class ClickCrystals implements ModInitializer, Global {
+
+    // provide update fixes here
+    static {
+        ProfileManager.renameOldFolder();
+    }
 
     public static Config config = JsonSerializable.load(Config.PATH_CONFIG, Config.class, new Config());
     public static ClickCrystalsInfo info = new ClickCrystalsInfo(version);
@@ -114,6 +119,9 @@ public final class ClickCrystals implements ModInitializer, Global {
         ClickCrystals.requestModInfo();
         system.println("-> loading config...");
         config.loadEntireConfig();
+        system.println("-> loading profiles...");
+        system.profiles.init();
+        system.printf("<- Profile set '%s'", system.profiles.profileConfig.getCurrentProfileName());
         system.println("-> checking updates...");
         ClickCrystals.checkUpdates();
 
@@ -182,22 +190,24 @@ public final class ClickCrystals implements ModInitializer, Global {
 
         // Commands
         system.addCommand(new VersionCommand());
-        system.addCommand(new CCToggleCommand());
-        system.addCommand(new CCHelpCommand());
+        system.addCommand(new ToggleCommand());
+        system.addCommand(new HelpCommand());
         system.addCommand(new GmcCommand());
         system.addCommand(new GmsCommand());
         system.addCommand(new GmaCommand());
         system.addCommand(new GmspCommand());
-        system.addCommand(new CCDebugCommand());
+        system.addCommand(new DebugCommand());
         system.addCommand(new PixelArtCommand());
         system.addCommand(new KeybindsCommand());
         system.addCommand(new RotateCommand());
         system.addCommand(new LookCommand());
-        system.addCommand(new CCScriptCommand());
+        system.addCommand(new ScriptCommand());
         system.addCommand(new ReloadCommand());
         system.addCommand(new FolderCommand());
+        system.addCommand(new ProfileCommand());
 
         // Hud
+        system.addHud(new CpsRelativeHud());
         system.addHud(new IconRelativeHud());
         system.addHud(new PingRelativeHud());
         system.addHud(new FpsRelativeHud());
@@ -211,7 +221,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addHud(new ResourceRelativeHud());
         system.addHud(new ColorOverlayHud());
         system.addHud(new ModuleListTextHud());
-        system.addHud(new ClickPerSecondHud());
+        system.addHud(new CrystSpeedHud());
         system.addHud(new ArmorItemHud());
         system.addHud(new NotificationHud());
         system.addHud(new EntityIndicatorHud());

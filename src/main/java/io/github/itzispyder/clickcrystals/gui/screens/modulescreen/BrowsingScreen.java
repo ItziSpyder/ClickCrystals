@@ -95,8 +95,8 @@ public class BrowsingScreen extends DefaultBase {
     private static class ScriptCreateNew extends ModuleElement {
         private final SearchBarElement textField = new SearchBarElement(0, 0) {
             private static final String newModule = """
-                    module create %s
-                    description Custom Scripted Module
+                    def module %s
+                    def desc "Custom Scripted Module"
                     
                     on module_enable {
                         
@@ -131,7 +131,7 @@ public class BrowsingScreen extends DefaultBase {
                         .replaceAll("[^a-zA-Z0-9_-]", "")
                         .toLowerCase();
 
-                File file = new File(Config.PATH_SCRIPTS + "/" + name + ".ccs");
+                File file = new File(Config.PATH_SCRIPTS + name + ".ccs");
                 if (!file.exists()) {
                     String preText = newModule.formatted(name);
                     FileValidationUtils.quickWrite(file, preText);
