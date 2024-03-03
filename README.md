@@ -3,21 +3,16 @@
 
 ---------------------------------------------------------------
 
-## Introducing ClickCrystalsScripts! (CCS)
+## Scripting Now Has a Wiki!
 
-Not enough modules? Your wonderful ideas aren't getting accepted?
-Want private features but don't know how to code?
-No worries, make your own modules with ClickCrystalsScripts (CCS)!
+Want to script custom modules but don't know how to script? 
+Don't worry, there's a full guide on how to create your own custom scripts and modules!
 
-Introducing CCS, a fast and easy way to create modules from simple swapping,
-to selective interactions in game!
-CCS consists of a lot of CCS commands, and can be either
-executed separately or together in a `.ccs` file, like a Minecraft
-datapack!
+ClickCrystals script is an interrupted scripting language that allows you to scripts and macros
+without any knowledge of coding. It contains no variables and mostly are just command lines that 
+are very similar to Minecraft.
 
-Interested? Download our latest version and start creating
-(CCS documentation coming soon on
-[GitHub Wiki](https://github.com/itzispyder/clickcrystals/wiki))
+The full documentation can be found [here](https://bit.ly/ccs-wiki)
 
 Happy coding and cpvping!
 
@@ -40,7 +35,7 @@ Happy coding and cpvping!
 
 ## Newest Changes
 ```yml
-Updating to: 1.20.4
+Version: 1.2.2
 
 Script:
   - on respawn # im not stable
@@ -62,46 +57,29 @@ Patches:
   - make event bus use concurrentlinkedqueue
   - Target hud totem pop text
   - escape key toggling modules on pojav
+  - Fixed pojav crashes for target hud
 
 Modules:
   - no block/container interactions # i no one
   - no gui background # i no one
   - camera clip # i no one
+  - block outline # i no one
+
+Commands:
+  - ,version
 ```
 
 ![demo](https://cdn.modrinth.com/data/YDYPZdGj/images/9b07a5d8c628b349386210cf537050bf73e21964.png)
-
-## How Do I Use ClickCrystals?
 
 ### Keybindings
 
 -----------------------------------------
 
-| **Keybinding** |       **Description**       |
-|----------------|:---------------------------:|
-| APOSTROPHE     | Open module settings screen |
-| COMMA          |   Custom commands prefix    |
-| UP_ARROW       |     Message resend bind     |
-| B              |        Zoom keybind         |
-| COLON          |   Open hud editor screen    |
-
-### Commands
-
------------------------------------------
-
-| **Command** | **Usage**                                             |              **Description**               |
-|-------------|-------------------------------------------------------|:------------------------------------------:|
-| .help       | .help `<module>`                                      |            Module info and help            |
-| .debug      | .debug `<item>`                                       |       Sends ClickCrystals debug info       |
-| .toggle     | .toggle `<module>` `[on,off,help]`                    |           Module toggle and help           |
-| .gma        | .gma                                                  |  Command alias for `/gamemode adventure`   |
-| .gmc        | .gmc                                                  |   Command alias for `/gamemode creative`   |
-| .gms        | .gms                                                  |   Command alias for `/gamemode survival`   |
-| .gmsp       | .gmsp                                                 |  Command alias for `/gamemode spectator`   |
-| .keybinds   | .keybinds                                             |     Opens the keybinds setting screen      |
-| .look       | .look `[at, rot, to]`                                 |            Look at a position.             |
-| .pixelart   | .pixelart `<mode>` `values` `image url (https://...)` | Spawns in pixel art! (Requires GMC and OP) |
-| .rotate     | .rotate `<pitch>` `<yaw>`                             |         Rotate to a pitch and yaw.         |
+| **Keybinding** | **Key Name** | **Description**             |
+|----------------|--------------|:----------------------------|
+| APOSTROPHE     | `'`          | Open module settings screen |
+| COMMA          | `,`          | Custom commands prefix      |
+| COLON          | `;`          | Open hud editor screen      |
 
 ### Modules
 
@@ -198,7 +176,6 @@ To stop: complaining it is a cheat/macro.
 ## Have A Good One!
 - Thanks for downloading ClickCrystals!
 - Make sure to give it a star on my [GitHub](https://github.com/itzispyder/clickcrystals)
-- Follow the project on [Modrinth](https://modrinth.com/mod/clickcrystals)
 - Feeling generous today? [Help support our project!](https://paypal.com/paypalme/thetrouper)
 
 ## SPECIAL THANKS AND SHOUTOUT TO
