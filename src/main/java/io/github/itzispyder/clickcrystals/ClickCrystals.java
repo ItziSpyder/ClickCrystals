@@ -189,6 +189,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         this.initModules();
 
         // Commands
+        system.addCommand(new FaqCommand());
         system.addCommand(new VersionCommand());
         system.addCommand(new ToggleCommand());
         system.addCommand(new HelpCommand());
@@ -236,7 +237,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addModule(new RailSwap());
         system.addModule(new TntSwap());
         system.addModule(new BowSwap());
-
+        system.addModule(new ElytraSwitch());
         // client
         system.addModule(new GuiBorders());
         system.addModule(new InGameHuds());
