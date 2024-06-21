@@ -77,7 +77,7 @@ public class HealthTags extends DummyModule {
         matrices.push();
         matrices.translate(0.0F, height, 0.0F);
         matrices.multiply(dispatcher.getRotation());
-        matrices.scale(scale, -scale, scale);
+        matrices.scale(-scale, -scale, scale);
 
         render(matrices, entity, vertexConsumers, text, x, y, width);
 
@@ -175,7 +175,7 @@ public class HealthTags extends DummyModule {
         BufferBuilder buf = getBuffer(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
         Matrix4f mat = matrices.peek().getPositionMatrix();
 
-        buf.vertex(mat, x + w / 2F, y + h / 2F, 0).color(color);
+        buf.vertex(mat, x + w / 2F, y + h / 2F, 0).color(color).next();
 
         float[][] corners = {
                 { x + w - r, y + r },
@@ -191,11 +191,11 @@ public class HealthTags extends DummyModule {
                 float angle = (float)Math.toRadians(i);
                 float rx = corners[corner][0] + (float)(Math.cos(angle) * r);
                 float ry = corners[corner][1] + (float)(Math.sin(angle) * r);
-                buf.vertex(mat, rx, ry, 0).color(color);
+                buf.vertex(mat, rx, ry, 0).color(color).next();
             }
         }
 
-        buf.vertex(mat, corners[0][0], y, 0).color(color); // connect last to first vertex
+        buf.vertex(mat, corners[0][0], y, 0).color(color).next(); // connect last to first vertex
 
         beginRendering();
         enableDepthTest();
@@ -212,10 +212,10 @@ public class HealthTags extends DummyModule {
         BufferBuilder buf = getBuffer(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         Matrix4f mat = matrices.peek().getPositionMatrix();
 
-        buf.vertex(mat, x, y, 0).color(color);
-        buf.vertex(mat, x + w, y, 0).color(color);
-        buf.vertex(mat, x + w, y + h, 0).color(color);
-        buf.vertex(mat, x, y + h, 0).color(color);
+        buf.vertex(mat, x, y, 0).color(color).next();
+        buf.vertex(mat, x + w, y, 0).color(color).next();
+        buf.vertex(mat, x + w, y + h, 0).color(color).next();
+        buf.vertex(mat, x, y + h, 0).color(color).next();
 
         beginRendering();
         enableDepthTest();

@@ -10,7 +10,6 @@ import io.github.itzispyder.clickcrystals.util.minecraft.PlayerUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.ScoreboardObjective;
@@ -87,7 +86,7 @@ public abstract class MixinInGameHud implements Global {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void renderHuds(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    public void renderHuds(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (PlayerUtils.invalid())
             return;
         for (Hud hud : system.huds().values()) {

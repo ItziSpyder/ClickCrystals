@@ -48,8 +48,10 @@ public abstract class MixinSplashOverlay implements Global {
     @Inject(method = "renderProgressBar", at = @At("TAIL"))
     public void renderProgressBar(DrawContext context, int minX, int minY, int maxX, int maxY, float opacity, CallbackInfo ci) {
         Tessellator tes = Tessellator.getInstance();
-        BufferBuilder buf = tes.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
+        BufferBuilder buf = tes.getBuffer();
         MatrixStack matrices = context.getMatrices();
+
+        buf.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
 
         int i = MathHelper.ceil((float)(maxX - minX - 2) * this.progress);
         int size = 50;
@@ -65,10 +67,10 @@ public abstract class MixinSplashOverlay implements Global {
 
         Matrix4f mat = matrices.peek().getPositionMatrix();
 
-        buf.vertex(mat, x, y, 0).texture(0, 0);
-        buf.vertex(mat, x, y + size, 0).texture(0, 1);
-        buf.vertex(mat, x + size, y + size, 0).texture(1, 1);
-        buf.vertex(mat, x + size, y, 0).texture(1, 0);
+        buf.vertex(mat, x, y, 0).texture(0, 0).next();
+        buf.vertex(mat, x, y + size, 0).texture(0, 1).next();
+        buf.vertex(mat, x + size, y + size, 0).texture(1, 1).next();
+        buf.vertex(mat, x + size, y, 0).texture(1, 0).next();
 
         RenderSystem.disableCull();
         RenderSystem.enableBlend();

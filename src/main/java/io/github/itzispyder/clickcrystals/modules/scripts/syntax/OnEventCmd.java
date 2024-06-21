@@ -182,7 +182,7 @@ public class OnEventCmd extends ScriptCommand implements ThenChainable {
             return item -> item.getItem().getTranslationKey().contains(arg.substring(1));
         }
         else if (arg.startsWith(":")) {
-            Identifier id = Identifier.of("minecraft", arg.substring(1));
+            Identifier id = new Identifier("minecraft", arg.substring(1));
             return item -> item.getItem() == Registries.ITEM.get(id);
         }
         return item -> false;
@@ -202,7 +202,7 @@ public class OnEventCmd extends ScriptCommand implements ThenChainable {
                 return defaultedBlockPredicates.get(subArg);
             }
 
-            Identifier id = Identifier.of("minecraft", subArg);
+            Identifier id = new Identifier("minecraft", subArg);
             return block -> block.getBlock() == Registries.BLOCK.get(id);
         }
         return block -> false;
@@ -216,7 +216,7 @@ public class OnEventCmd extends ScriptCommand implements ThenChainable {
             return ent -> ent.getType().getTranslationKey().contains(arg.substring(1));
         }
         else if (arg.startsWith(":")) {
-            Identifier id = Identifier.of("minecraft", arg.substring(1));
+            Identifier id = new Identifier("minecraft", arg.substring(1));
             return ent -> ent.getType() == Registries.ENTITY_TYPE.get(id);
         }
         return ent -> false;
@@ -238,7 +238,7 @@ public class OnEventCmd extends ScriptCommand implements ThenChainable {
             return result == null ? null : Registries.SOUND_EVENT.get(result);
         }
         else if (arg.startsWith(":")) {
-            Identifier id = Identifier.of("minecraft", arg.substring(1));
+            Identifier id = new Identifier("minecraft", arg.substring(1));
             return Registries.SOUND_EVENT.get(id);
         }
         return null;
@@ -260,7 +260,7 @@ public class OnEventCmd extends ScriptCommand implements ThenChainable {
             return result == null ? null : Registries.STATUS_EFFECT.get(result);
         }
         else if (arg.startsWith(":")) {
-            Identifier id = Identifier.of("minecraft", arg.substring(1));
+            Identifier id = new Identifier("minecraft", arg.substring(1));
             return Registries.STATUS_EFFECT.get(id);
         }
         return null;
