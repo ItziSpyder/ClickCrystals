@@ -6,7 +6,7 @@ import io.github.itzispyder.clickcrystals.client.system.ClickCrystalsInfo;
 import io.github.itzispyder.clickcrystals.gui.screens.BanScreen;
 import io.github.itzispyder.clickcrystals.util.misc.Voidable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.session.Session;
+import net.minecraft.client.util.Session;
 
 import java.util.UUID;
 

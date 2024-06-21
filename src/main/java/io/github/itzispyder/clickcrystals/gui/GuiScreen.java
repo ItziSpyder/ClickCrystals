@@ -112,7 +112,7 @@ public abstract class GuiScreen extends Screen implements Global {
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void renderBackground(DrawContext context) {
 
     }
 
@@ -179,8 +179,8 @@ public abstract class GuiScreen extends Screen implements Global {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+    public boolean mouseScrolled(double mouseX, double mouseY, double verticalAmount) {
+        super.mouseScrolled(mouseX, mouseY, verticalAmount);
 
         for (MouseScrollCallback callback : mouseScrollListeners) {
             callback.handleMouse(mouseX, mouseY, verticalAmount);

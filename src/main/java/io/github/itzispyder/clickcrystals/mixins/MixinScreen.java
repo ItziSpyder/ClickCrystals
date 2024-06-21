@@ -21,7 +21,7 @@ public abstract class MixinScreen implements Global {
         system.eventBus.pass(event);
     }
 
-    @Inject(method = "renderInGameBackground", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderBackground", at = @At("HEAD"), cancellable = true)
     private void renderInGameBackground(CallbackInfo info) {
         NoGuiBackground gui = Module.get(NoGuiBackground.class);
         if (gui.isEnabled() && gui.noOverlay.getVal()) {
