@@ -7,7 +7,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.math.BlockPos;
@@ -70,9 +69,7 @@ public final class PlayerUtils implements Global {
     }
 
     public static float getEntityNameLabelHeight(Entity entity, float tickDelta) {
-        float yaw = entity.getYaw(tickDelta);
-        Vec3d vec = entity.getAttachments().getPointNullable(EntityAttachmentType.NAME_TAG, 0, yaw);
-        return (float)(vec == null ? 0.5 : vec.y + 0.5);
+        return entity.getNameLabelHeight();
     }
 
     public static void sendPacket(Packet<?> packet) {

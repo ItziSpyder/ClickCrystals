@@ -30,7 +30,7 @@ public abstract class MixinEntityRenderer {
     }
 
     @Inject(method = "renderLabelIfPresent", at = @At("HEAD"), cancellable = true)
-    public <T extends Entity> void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, float tickDelta, CallbackInfo ci) {
+    public <T extends Entity> void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         var health = HealthTags.get(HealthTags.class);
 
         if (health.isEnabled() && entity instanceof LivingEntity liv) {

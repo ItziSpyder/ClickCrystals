@@ -12,7 +12,6 @@ import io.github.itzispyder.clickcrystals.util.misc.Pair;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -151,7 +150,7 @@ public class IfCmd extends ScriptCommand implements Global, ThenChainable {
                 return pair(bl, i + 2);
             }
             case EFFECT_AMPLIFIER -> {
-                var statusEffect = Registries.STATUS_EFFECT.getEntry(ScriptParser.parseStatusEffect(args.get(i + 1).toString()));
+                var statusEffect = ScriptParser.parseStatusEffect(args.get(i + 1).toString());
                 StatusEffectInstance effect = PlayerUtils.player().getStatusEffect(statusEffect);
 
                 if (effect == null) {
@@ -160,7 +159,7 @@ public class IfCmd extends ScriptCommand implements Global, ThenChainable {
                 return pair(evalIntegers(effect.getAmplifier(), args.get(i + 2).toString()), i + 3);
             }
             case EFFECT_DURATION -> {
-                var statusEffect = Registries.STATUS_EFFECT.getEntry(ScriptParser.parseStatusEffect(args.get(i + 1).toString()));
+                var statusEffect = ScriptParser.parseStatusEffect(args.get(i + 1).toString());
                 StatusEffectInstance effect = PlayerUtils.player().getStatusEffect(statusEffect);
                 if (effect == null) {
                     effect = new StatusEffectInstance(statusEffect);

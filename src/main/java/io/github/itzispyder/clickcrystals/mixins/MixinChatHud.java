@@ -4,7 +4,6 @@ import io.github.itzispyder.clickcrystals.Global;
 import io.github.itzispyder.clickcrystals.events.events.client.ChatReceiveEvent;
 import io.github.itzispyder.clickcrystals.util.StringUtils;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.client.gui.hud.MessageIndicator;
 import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
@@ -23,8 +22,8 @@ public abstract class MixinChatHud implements Global {
     }
 
     @Inject(method = "logChatMessage", at = @At("HEAD"), cancellable = true)
-    public void logChatMessage(ChatHudLine message, CallbackInfo ci) {
-        String msg = StringUtils.decolor(message.content().getString());
+    public void logChatMessage(Text message, MessageIndicator indicator, CallbackInfo ci) {
+        String msg = StringUtils.decolor(message.getString());
         if (msg.toLowerCase().contains(modId)) {
             ci.cancel();
             system.logger.log("SYSTEM-CHAT", msg);
