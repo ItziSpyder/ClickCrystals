@@ -22,18 +22,18 @@ Happy coding and cpvping!
 
 ## What Version Should I Get?
 
-| What You Have | What to get                         |
-|:--------------|:------------------------------------|
-| higher..      | how is that even possible?          |
-| 1.20.6        | 1.20.6-(latestVersion) *recommended |
-| 1.20.5        | not supported                       |
-| 1.20.4        | 1.20.4-(latestVersion) *recommended |
-| 1.20.3        | 1.20.4-(latestVersion) *recommended |
-| 1.20.2        | 1.20.2-(latestVersion)              |
-| 1.20.1        | 1.20.1-(latestVersion)              |
-| 1.20          | 1.20.1-(latestVersion)              |
-| 1.19.4        | 1.19.4-(latestVersion)              |
-| ..lower       | cry                                 |
+| What You Have | What to get                       |
+|:--------------|:----------------------------------|
+| higher..      | how is that even possible?        |
+| 1.21          | 1.21-(latestVersion) *recommended |
+| 1.20.6        | 1.20.6-(latestVersion)            |
+| 1.20.5        | not supported                     |
+| 1.20.4        | 1.20.4-(latestVersion)            |
+| 1.20.3        | 1.20.4-(latestVersion)            |
+| 1.20.2        | 1.20.2-(latestVersion)            |
+| 1.20.1        | 1.20.1-(latestVersion)            |
+| 1.20          | 1.20.1-(latestVersion)            |
+| ..lower       | cry                               |
 
 ## Newest Changes
 ```yml
@@ -53,6 +53,7 @@ Added:
   - script command condition # if input_active k (key_name) ex. if input active key k
   - script command input # input key (key_name) ex. input key left_shift
   - script command gui_quickmove updated # now supports swapping to hotbar! ex. gui_quickmove #totem 7
+  - module SelfGlow # credit: I-No-One
 
 Tweaked:
   - made wait script command spit an error when people use it wrongly cuz too many people uses it wrongly
