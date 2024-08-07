@@ -3,13 +3,19 @@
 
 ---------------------------------------------------------------
 
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/clickcrystals?label=Modrinth&color=04b54b)
+![CurseForge Downloads](https://img.shields.io/curseforge/dt/946253?label=CurseForge&color=orange)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/itzispyder/clickcrystals/total?label=GitHub&color=blue)
+![PlanetMinecraft Downloads](https://img.shields.io/badge/PlanetMC-8.2k-brightgreen)
+![Discord](https://img.shields.io/discord/1095079504516493404?label=Discord&color=b434eb)
+
 ## Scripting Now Has a Wiki!
 
-Want to script custom modules but don't know how to script? 
+Want to script custom modules but don't know how to script?
 Don't worry, there's a full guide on how to create your own custom scripts and modules!
 
 ClickCrystals script is an interrupted scripting language that allows you to scripts and macros
-without any knowledge of coding. It contains no variables and mostly are just command lines that 
+without any knowledge of coding. It contains no variables and mostly are just command lines that
 are very similar to Minecraft.
 
 The full documentation can be found [here](https://bit.ly/ccs-wiki)
@@ -37,32 +43,27 @@ Happy coding and cpvping!
 
 ## Newest Changes
 ```yml
-Version: 1.2.6
+Version: 1.2.7
+
+Tweaks:
+  - change clickcrystals script on tick to pretick so it doesnt flag post
+  - rewrite armor hud # i no one
 
 Add:
-  - as command # as nearest_entity :player if holding :diamond_sword
-  - if on_ground
-  - if on_fire
-  - if frozen
-  - if has_equiptment
-  - if blocking
-  - if in_singleplayer
-  - if hurt_time
-  - if cursor_item
-  - if moving
-  - if colliding
-  - if colliding_horizontally
-  - if colliding_vertically
-  - if reference_entity
-  - execute_period # execute_period 0.05 {} to wait 0.05 seconds between each execution inside of the brackets
-  - hold_input # hold_input attack 100
-  - hold_input cancel
+  - pull and merge PR from I-No-One
+  - added Teams module # i no one
+  - added FreeLook Module # i no one
+  - added AutoDisconnect Module # i no one
+
+Scripting:
+  - add script command if entity pos
+  - increased the range for entity selection from 32 to 128
+  - add on post_tick
+  - add on pre_tick
 
 Patches:
-  - link module edit screen to module browsing screen
-
-Pulls:
-  - accept PR https://github.com/ItziSpyder/ClickCrystals/pull/70
+  - entity_in_range not working
+  - block ID selections with commas not working properly
 ```
 
 ![demo](https://cdn.modrinth.com/data/YDYPZdGj/images/d4ad4320aaf5d8589829e3d1691ec5755422a778.png)

@@ -27,18 +27,16 @@ public final class Tex implements Global {
     }
 
     public static class Defaults {
-        public static final Identifier ITEM_WIDGET = new Identifier(modId, "textures/gui/item_widget.png");
-        public static final Identifier OPTIONS_BACKGROUND = new Identifier(modId, "textures/gui/options_background.png");
-        public static final Identifier NO_TOTEMS_MEME = new Identifier(modId, "textures/overlays/no_totem.png");
-        public static final Identifier NO_TOTEMS_ICON = new Identifier(modId, "textures/overlays/totemless_icon.png");
+        public static final Identifier OPTIONS_BACKGROUND = Identifier.of(modId, "textures/gui/options_background.png");
+        public static final Identifier NO_TOTEMS_MEME = Identifier.of(modId, "textures/overlays/no_totem.png");
+        public static final Identifier NO_TOTEMS_ICON = Identifier.of(modId, "textures/overlays/totemless_icon.png");
     }
 
     public static class Socials {
-        public static final Identifier DISCORD = new Identifier(modId, "textures/display/socials/discord.png");
-        public static final Identifier MODRINTH = new Identifier(modId, "textures/display/socials/modrinth.png");
-        public static final Identifier CURSEFORGE = new Identifier(modId, "textures/display/socials/curseforge.png");
-        public static final Identifier YOUTUBE = new Identifier(modId, "textures/display/socials/youtube.png");
-        public static final Identifier PLANETMC = new Identifier(modId, "textures/display/socials/planetmc.png");
+        public static final Identifier DISCORD = Identifier.of(modId, "textures/display/socials/discord.png");
+        public static final Identifier CURSEFORGE = Identifier.of(modId, "textures/display/socials/curseforge.png");
+        public static final Identifier YOUTUBE = Identifier.of(modId, "textures/display/socials/youtube.png");
+        public static final Identifier PLANETMC = Identifier.of(modId, "textures/display/socials/planetmc.png");
     }
 
     public static class Backdrops {

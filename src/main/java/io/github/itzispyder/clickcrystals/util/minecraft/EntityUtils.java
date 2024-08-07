@@ -1,14 +1,19 @@
 package io.github.itzispyder.clickcrystals.util.minecraft;
 
 import io.github.itzispyder.clickcrystals.Global;
+import io.github.itzispyder.clickcrystals.modules.Module;
+import io.github.itzispyder.clickcrystals.modules.modules.misc.TeamDetector;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
+import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -16,8 +21,10 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
@@ -118,7 +125,7 @@ public class EntityUtils implements Global {
     public static Entity getNearestEntity(Entity ref, double range, Predicate<Entity> filter) {
         Vec3d at = ref.getPos();
         List<Entity> candidates = ref.getWorld()
-                .getOtherEntities(PlayerUtils.player(), Box.from(at).expand(range), ent -> ent != ref && filter.test(ref)).stream()
+                .getOtherEntities(PlayerUtils.player(), Box.from(at).expand(range), ent -> ent != ref && filter.test(ent)).stream()
                 .sorted(Comparator.comparing(entity -> entity.getPos().distanceTo(at)))
                 .toList();
 
@@ -165,5 +172,45 @@ public class EntityUtils implements Global {
 
         if (ent != null)
             function.accept(ent);
+    }
+
+    public static boolean isTeammate(PlayerEntity target) {
+        TeamDetector teamDetector = Module.get(TeamDetector.class);
+        if (!teamDetector.isEnabled() || !teamDetector.cancelCcs.getVal())
+            return false;
+
+        if (teamDetector.teamFindingMethod.getVal() == TeamDetector.TeamsMethod.SCOREBOARD)
+            return isSameScoreboardTeam(target);
+        else if (teamDetector.teamFindingMethod.getVal() == TeamDetector.TeamsMethod.COLOR_NAME)
+            return isSameColorNameTeam(target);
+        return false;
+    }
+  
+    public static boolean isSameScoreboardTeam(PlayerEntity player) {
+        Scoreboard scoreboard = PlayerUtils.getWorld().getScoreboard();
+        Team playerTeam = scoreboard.getTeam(PlayerUtils.player().getName().getString());
+        Team otherPlayerTeam = scoreboard.getTeam(player.getName().getString());
+        return playerTeam != null && playerTeam.equals(otherPlayerTeam);
+    }
+
+    public static boolean isSameColorNameTeam(PlayerEntity player) {
+        String playerColorName = String.valueOf(PlayerUtils.player().getTeamColorValue());
+        String targetColorName = String.valueOf(player.getTeamColorValue());
+        return Objects.equals(playerColorName, targetColorName);
+    }
+
+    public static List<Entity> getEntitiesAt(BlockPos pos) {
+        if (PlayerUtils.invalid())
+            return new ArrayList<>();
+
+        List<Entity> list = new ArrayList<>();
+        for (Entity ent : PlayerUtils.player().clientWorld.getEntities())
+            if (ent != null && ent.isAlive() && pos.equals(ent.getBlockPos()))
+                list.add(ent);
+        return list;
+    }
+
+    public static boolean checkEntityAt(BlockPos pos, Predicate<Entity> filter) {
+        return getEntitiesAt(pos).stream().anyMatch(filter);
     }
 }
