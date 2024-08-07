@@ -243,7 +243,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addHud(new ColorOverlayHud());
         system.addHud(new ModuleListTextHud());
         system.addHud(new CrystSpeedHud());
-        system.addHud(new ArmorItemHud());
+        system.addHud(new ArmorRelativeHud());
         system.addHud(new NotificationHud());
         system.addHud(new EntityIndicatorHud());
     }
@@ -260,6 +260,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addModule(new BowSwap());
 
         // client
+        system.addModule(new AutoDisconnect());
         system.addModule(new SelfGlow());
         system.addModule(new GuiBorders());
         system.addModule(new InGameHuds());
@@ -279,8 +280,8 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addModule(new GuiCursor());
 
         // misc
+        system.addModule(new TeamDetector());
         system.addModule(new NoInteractions());
-        system.addModule(new ArmorHud());
         system.addModule(new AutoGG());
         system.addModule(new AutoRespawn());
         system.addModule(new ArrayListHud());
@@ -303,6 +304,7 @@ public final class ClickCrystals implements ModInitializer, Global {
         system.addModule(new TimeChanger());
 
         // rendering
+        system.addModule(new FreeLook());
         system.addModule(new BlockOutline());
         system.addModule(new CameraClip());
         system.addModule(new NoGuiBackground());
